@@ -1,4 +1,5 @@
-import {Configuration, OpenAIApi} from "openai";
+import {Configuration} from "openai-edge";
+import {OpenAIApi} from "openai";
 const config = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
