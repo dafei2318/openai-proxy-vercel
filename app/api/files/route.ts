@@ -1,11 +1,10 @@
-import {Configuration} from "openai-edge";
-import {OpenAIApi} from "openai";
+import {Configuration, OpenAIApi} from "openai-edge";
 const config = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
 const openai = new OpenAIApi(config);
-
+console.log('log',openai);
 export const runtime = "edge";
 
 export async function POST(req: Request) {
