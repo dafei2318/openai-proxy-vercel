@@ -1,49 +1,13 @@
-import {Configuration, OpenAIApi} from "openai-edge";
-const config = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
-const openai = new OpenAIApi(config);
-console.log('log',openai);
-export const runtime = "edge";
-
 export async function POST(req: Request) {
   try {
-    const payload = await req.json();
-
-    console.log("request", payload?.messages);
-
-    const response = await openai.files.list();
-
-    console.log("response", response.status, response.statusText);
-
-    if (payload.stream) {
-      const reader = response?.body?.getReader();
-      const stream = new ReadableStream({
-        start(controller) {
-          function push() {
-            reader
-              ?.read()
-              .then(({done, value}) => {
-                if (done) {
-                  controller.close();
-                  return;
-                }
-                controller.enqueue(value);
-                push();
-              })
-              .catch((error) => {
-                console.error(error);
-                controller.error(error);
-              });
-          }
-          push();
-        },
-      });
-      return new Response(stream);
-    }
-
-    const data = await response.json();
+   
+    const url = 'https://api.openai.com/v1/files';
+    const headers = {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
+  };
+  const response = await fetch(url, { headers });
+  const data = await response.json();
     return new Response(JSON.stringify(data), {status: 200});
   } catch (error) {
     console.error(error);
