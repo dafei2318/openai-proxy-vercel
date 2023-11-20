@@ -8,7 +8,7 @@ export async function POST(req: Request) {
     'OpenAI-Beta': 'assistants=v1'
   };
   const payload = await req.json();
-  const response = await fetch(url, { headers,body:payload });
+  const response = await fetch(url, { method: 'POST',headers,body:payload });
   const data = await response.json();
     return new Response(JSON.stringify(data), {status: 200});
   } catch (error) {
