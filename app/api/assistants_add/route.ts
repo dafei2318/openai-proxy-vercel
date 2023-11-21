@@ -10,6 +10,7 @@ export async function POST(req: Request) {
   const payload = await req.json();
 
   const body = await JSON.stringify(payload);
+  console.log('body',body);
   const response = await fetch(url, { method:'POST',headers:headers,body:body });
   const data = await response.json();
     return new Response(JSON.stringify(data), {status: 200});
