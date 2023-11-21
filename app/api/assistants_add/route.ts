@@ -7,8 +7,10 @@ export async function POST(req: Request) {
     Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
     'OpenAI-Beta': 'assistants=v1'
   };
-  console.log('req',req.body);
-  const payload = await JSON.stringify(req.body);
+  const payload = await req.json();
+
+    console.log("request", payload);
+ // const payload = await JSON.stringify(req.body);
   const response = await fetch(url, { method:'POST',headers:headers,body:payload });
   const data = await response.json();
     return new Response(JSON.stringify(data), {status: 200});
