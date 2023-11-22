@@ -1,4 +1,4 @@
-export async function POST(req: { body: any; }, res: any) {
+export async function POST(req: Request) {
   try {
    
     const url = 'https://api.openai.com/v1/files';
