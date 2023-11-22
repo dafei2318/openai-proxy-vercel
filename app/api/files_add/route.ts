@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import bodyParser from 'body-parser';
-export async function POST(req:NextRequest,res:NextResponse) {
+import querystring from 'querystring';
+export async function POST(req:NextRequest) {
   try {
    
     const url = 'https://api.openai.com/v1/files';
@@ -8,11 +8,14 @@ export async function POST(req:NextRequest,res:NextResponse) {
     'Content-Type': 'multipart/form-data',
     Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
   };
-  bodyParser.urlencoded({ extended: true })(req, res, () => {
-    console.log(req.body); // 输出客户端发送的参数
-    res.end();
-    return;
+  let requestBody = '';
+
+  req.on('data', (chunk: string) => {
+    requestBody += chunk;
   });
+
+  const body=querystring.parse(requestBody);
+  console.log('data',body);return;
   // const body = new FormData();
   // body.append('purpose',get_data.purpose);
   // body.append('file',file);
