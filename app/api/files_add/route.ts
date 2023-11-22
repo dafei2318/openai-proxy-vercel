@@ -10,7 +10,6 @@ export async function POST(req:NextRequest) {
     Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
   };
   const handler = nextConnect();
-// 解析请求体
 handler.use(async (req: NextRequest, res: NextResponse) => {
   let requestBody = '';
 
