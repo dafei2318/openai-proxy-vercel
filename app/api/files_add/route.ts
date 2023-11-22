@@ -1,7 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
-import {nextConnect} from 'next-connect';
+import { getServerSideProps } from 'next';
 
-export async function POST(req:NextRequest) {
+export async function POST() {
   try {
    
     const url = 'https://api.openai.com/v1/files';
@@ -9,18 +8,12 @@ export async function POST(req:NextRequest) {
     'Content-Type': 'multipart/form-data',
     Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
   };
-  const handler = nextConnect();
-handler.use(async (req: NextRequest, res: NextResponse) => {
-  let requestBody = '';
+  const serverProps = getServerSideProps({  
+    query: {},  
+  });  
+  console.log('serverProps',serverProps.data)
 
-  req.on('data', (chunk: string) => {
-    requestBody += chunk;
-  });
-  const params = JSON.parse(requestBody);
-  console.log('data',params);return;
-});
-
-  
+  return;
   // const body = new FormData();
   // body.append('purpose',get_data.purpose);
   // body.append('file',file);
