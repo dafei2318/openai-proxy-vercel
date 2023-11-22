@@ -6,11 +6,12 @@ export async function POST(req:Request) {
     'Content-Type': 'multipart/form-data',
     Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
   };
-  const { purpose, file } = req.body;
-  const body = new FormData();
-  body.append('purpose',purpose);
-  body.append('file',file);
-  const response = await fetch(url, { method:'POST',headers:headers,body:body });
+  const get_data = req.json();
+  console.log('req',req);
+  // const body = new FormData();
+  // body.append('purpose',get_data.purpose);
+  // body.append('file',file);
+  const response = await fetch(url, { method:'POST',headers:headers });
   const data = await response.json();
     return new Response(JSON.stringify(data), {status: 200});
   } catch (error) {
