@@ -1,4 +1,4 @@
-import { IncomingForm } from 'formidable';
+import multiparty from 'multiparty';
 export async function POST(req: Request) {
   try {
    
@@ -8,16 +8,11 @@ export async function POST(req: Request) {
     Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
   };
  
-  const form = new IncomingForm();
-  form.parse(req, (err, fields, files) => {
+  const form = new multiparty.Form();
 
-
-    // 获取解析后的表单字段（fields）和文件（files）
-    const formData = fields;
-    console.log('formData',formData);
-
-  });
-
+    form.parse(req, (err, fields, files) => {
+      console.log('fields',fields);
+    });
   return;
   // const body = new FormData();
   // body.append('purpose',get_data.purpose);
