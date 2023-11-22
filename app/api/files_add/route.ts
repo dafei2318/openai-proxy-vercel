@@ -20,8 +20,6 @@ handler.use(async (req: NextRequest, res: NextResponse) => {
   });
   const params = JSON.parse(requestBody);
   console.log('data',params);return;
-
-
 });
 
   
