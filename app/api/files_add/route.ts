@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import querystring from 'querystring';
+import nextConnect from 'next-connect';
+
 export async function POST(req:NextRequest) {
   try {
    
@@ -8,14 +9,22 @@ export async function POST(req:NextRequest) {
     'Content-Type': 'multipart/form-data',
     Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
   };
+  const handler = nextConnect();
+
+// 解析请求体
+handler.use(async (req: NextRequest, res: NextResponse) => {
   let requestBody = '';
 
   req.on('data', (chunk: string) => {
     requestBody += chunk;
   });
+  const params = JSON.parse(requestBody);
+  console.log('data',params);return;
 
-  const body=querystring.parse(requestBody);
-  console.log('data',body);return;
+
+});
+
+  
   // const body = new FormData();
   // body.append('purpose',get_data.purpose);
   // body.append('file',file);
