@@ -1,3 +1,4 @@
+import { IncomingForm } from 'formidable';
 export async function POST(req: Request) {
   try {
    
@@ -7,8 +8,15 @@ export async function POST(req: Request) {
     Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
   };
  
-  const formData = req.body;
-  console.log('formData',formData);return;
+  const form = new IncomingForm();
+  form.parse(req, (err, fields, files) => {
+
+
+    // 获取解析后的表单字段（fields）和文件（files）
+    const formData = fields;
+    console.log('formData',formData);
+
+  });
 
   return;
   // const body = new FormData();
