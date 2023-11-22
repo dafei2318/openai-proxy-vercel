@@ -1,4 +1,5 @@
-export async function POST(req:Request) {
+import { NextRequest, NextResponse } from "next/server";
+export async function POST(req:NextRequest) {
   try {
    
     const url = 'https://api.openai.com/v1/files';
@@ -6,8 +7,7 @@ export async function POST(req:Request) {
     'Content-Type': 'multipart/form-data',
     Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
   };
-  const get_data = req.json();
-  console.log('req',req);
+  console.log('req',req.body);return;
   // const body = new FormData();
   // body.append('purpose',get_data.purpose);
   // body.append('file',file);
