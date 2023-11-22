@@ -1,4 +1,4 @@
-export async function POST(req: Request) {
+export async function POST(req:Request) {
   try {
    
     const url = 'https://api.openai.com/v1/files';
@@ -6,10 +6,10 @@ export async function POST(req: Request) {
     'Content-Type': 'multipart/form-data',
     Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
   };
-  const payload = await req.json();
+  const { purpose, file } = req.body;
   const body = new FormData();
-  body.append('purpose',payload.purpose);
-  body.append('file',payload.file);
+  body.append('purpose',purpose);
+  body.append('file',file);
   const response = await fetch(url, { method:'POST',headers:headers,body:body });
   const data = await response.json();
     return new Response(JSON.stringify(data), {status: 200});
