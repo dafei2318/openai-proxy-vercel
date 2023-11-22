@@ -1,6 +1,4 @@
-import { getServerSideProps } from 'next';
-
-export async function POST() {
+export async function POST(req: { body: any; }, res: any) {
   try {
    
     const url = 'https://api.openai.com/v1/files';
@@ -8,10 +6,9 @@ export async function POST() {
     'Content-Type': 'multipart/form-data',
     Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
   };
-  const serverProps = getServerSideProps({  
-    query: {},  
-  });  
-  console.log('serverProps',serverProps.data)
+ 
+  const formData = req.body;
+  console.log('formData',formData);return;
 
   return;
   // const body = new FormData();
