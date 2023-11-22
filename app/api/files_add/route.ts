@@ -3,7 +3,7 @@ export async function POST(req: Request) {
    
     const url = 'https://api.openai.com/v1/files';
     const headers = {
-    'Content-Type': 'application/json',
+    'Content-Type': 'multipart/form-data',
     Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
   };
   const payload = await req.json();
