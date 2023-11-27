@@ -13,7 +13,6 @@ export async function POST(req: any) {
     form.parse(req, (err, fields, files) => {
       if (err) {
         // 处理错误
-        console.log('fields',fields);return;
         console.error(err);
         //return res.status(500).json({ error: 'Something went wrong' });
       }
@@ -23,18 +22,11 @@ export async function POST(req: any) {
       // files 包含上传的文件信息
 
       // 示例：打印上传的文件名
-      //console.log(files.file.name);
+      console.log(files.fields);return;
 
       // 返回响应
-     // return res.status(200).json({ message: 'Form data processed successfully' });
-    return;
-  
-  // const body = new FormData();
-  // body.append('purpose',get_data.purpose);
-  // body.append('file',file);
-  const response = await fetch(url, { method:'POST',headers:headers });
-  const data = await response.json();
-    return new Response(JSON.stringify(data), {status: 200});
+      //return res.status(200).json({ message: 'Form data processed successfully' });
+    });
   } catch (error) {
     console.error(error);
 
