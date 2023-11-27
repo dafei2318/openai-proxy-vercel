@@ -1,5 +1,5 @@
 import multiparty from 'multiparty';
-export async function POST(req: Request) {
+export async function POST(req: any) {
   try {
    
     const url = 'https://api.openai.com/v1/files';
