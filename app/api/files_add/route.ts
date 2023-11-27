@@ -1,4 +1,4 @@
-import { parse } from 'querystring';
+const formidable = require('formidable');
 export async function POST(req: any) {
   try {
    
@@ -8,17 +8,25 @@ export async function POST(req: any) {
     Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
   };
  
-  let body = '';
+  const form = new formidable.IncomingForm();
 
-    req.on('data', (chunk: string) => {
-      body += chunk;
-    });
+    form.parse(req, (err, fields, files) => {
+      if (err) {
+        // 处理错误
+        console.log('fields',fields);return;
+        console.error(err);
+        //return res.status(500).json({ error: 'Something went wrong' });
+      }
 
-    req.on('end', () => {
-      const formData = parse(body);
-      console.log('Form data:', formData);
-      //res.status(200).json({ message: 'Form data received successfully' });
-    });
+      // 在这里处理表单字段和文件
+      // fields 包含表单字段的值
+      // files 包含上传的文件信息
+
+      // 示例：打印上传的文件名
+      //console.log(files.file.name);
+
+      // 返回响应
+     // return res.status(200).json({ message: 'Form data processed successfully' });
     return;
   
   // const body = new FormData();
