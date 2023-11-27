@@ -1,4 +1,4 @@
-import formidable from 'formidable';
+import { parse } from 'querystring';
 export async function POST(req: any) {
   try {
    
@@ -8,13 +8,24 @@ export async function POST(req: any) {
     Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
   };
  
-  const form = new formidable.IncomingForm();
+  let body = '';
 
-    form.parse(req, (err, fields, files) => {
-      console.log('fields',fields);return;
-
+    req.on('data', (chunk: string) => {
+      body += chunk;
     });
-  return;
+
+    req.on('end', () => {
+      const formData = parse(body);
+      console.log('Form data:', formData);
+      //res.status(200).json({ message: 'Form data received successfully' });
+    });
+    return;
+
+    req.on('error', (err: any) => {
+      console.error('Error reading request body:', err);
+      res.status(500).json({ error: 'Error reading request body' });
+    });
+  
   // const body = new FormData();
   // body.append('purpose',get_data.purpose);
   // body.append('file',file);
