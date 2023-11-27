@@ -20,11 +20,6 @@ export async function POST(req: any) {
       //res.status(200).json({ message: 'Form data received successfully' });
     });
     return;
-
-    req.on('error', (err: any) => {
-      console.error('Error reading request body:', err);
-      res.status(500).json({ error: 'Error reading request body' });
-    });
   
   // const body = new FormData();
   // body.append('purpose',get_data.purpose);
