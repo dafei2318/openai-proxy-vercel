@@ -1,4 +1,4 @@
-import multiparty from 'multiparty';
+import formidable from 'formidable';
 export async function POST(req: any) {
   try {
    
@@ -8,10 +8,11 @@ export async function POST(req: any) {
     Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
   };
  
-  const form = new multiparty.Form();
+  const form = new formidable.IncomingForm();
 
     form.parse(req, (err, fields, files) => {
-      console.log('fields',fields);
+      console.log('fields',fields);return;
+
     });
   return;
   // const body = new FormData();
