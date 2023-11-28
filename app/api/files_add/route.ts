@@ -1,4 +1,14 @@
-const formidable = require('formidable');
+import multer from 'multer';
+import path from 'path';
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: path.join(process.cwd(), 'public/uploads/'), 
+    filename: (req, file, cb) => {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+      cb(null, file.fieldname + '-' + uniqueSuffix);
+    },
+  }),
+});
 export async function POST(req: any) {
   try {
    
@@ -8,25 +18,9 @@ export async function POST(req: any) {
     Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
   };
  
-  const form = new formidable.IncomingForm();
+  const { originalname, filename, path } = req.file;
 
-    form.parse(req, (err: any, fields: any, files: { fields: any; }) => {
-      // if (err) {
-      //   // 处理错误
-      //   console.error(err);
-      //   //return res.status(500).json({ error: 'Something went wrong' });
-      // }
-
-      // 在这里处理表单字段和文件
-      // fields 包含表单字段的值
-      // files 包含上传的文件信息
-
-      // 示例：打印上传的文件名
-      console.log(files.fields);return;
-
-      // 返回响应
-      //return res.status(200).json({ message: 'Form data processed successfully' });
-    });
+      console.log('file',req.file);return;
   } catch (error) {
     console.error(error);
 
