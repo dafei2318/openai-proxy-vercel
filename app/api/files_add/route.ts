@@ -11,11 +11,11 @@ export async function POST(req: any) {
   const form = new formidable.IncomingForm();
 
     form.parse(req, (err: any, fields: any, files: { fields: any; }) => {
-      if (err) {
-        // 处理错误
-        console.error(err);
-        //return res.status(500).json({ error: 'Something went wrong' });
-      }
+      // if (err) {
+      //   // 处理错误
+      //   console.error(err);
+      //   //return res.status(500).json({ error: 'Something went wrong' });
+      // }
 
       // 在这里处理表单字段和文件
       // fields 包含表单字段的值
