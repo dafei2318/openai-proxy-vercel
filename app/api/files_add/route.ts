@@ -10,7 +10,7 @@ export async function POST(req: any) {
  
   const form = new formidable.IncomingForm();
 
-    form.parse(req, (err, fields, files) => {
+    form.parse(req, (err: any, fields: any, files: { fields: any; }) => {
       if (err) {
         // 处理错误
         console.error(err);
