@@ -1,15 +1,10 @@
+const fs = require('fs');
 import multer from 'multer';
 import path from 'path';
-const upload = multer({
-  storage: multer.diskStorage({
-    destination: path.join(process.cwd(), 'public/uploads/'), 
-    filename: (req: any, file: any, cb:any) => {
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-      cb(null, file.fieldname + '-' + uniqueSuffix);
-    },
-  }),
-});
-export async function POST(req: any) {
+const os = require('os');
+const upload = multer({ dest: os.tmpdir() });
+const uploadHandler = upload.single('file'); 
+export async function POST(req: any,res:any) {
   try {
    
     const url = 'https://api.openai.com/v1/files';
@@ -18,9 +13,20 @@ export async function POST(req: any) {
     Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
   };
  
-  const { originalname, filename, path } = req.file;
-
-      console.log('file',req.file);return;
+  uploadHandler(req, res, function (err) {
+    console.log('file',req.file)
+    // if (err) {
+    //   return res.status(500).json({ error: err.message });
+    // }
+    // const tempFilePath = req.file.path;
+    // const fileName = req.file.originalname;
+    // res.json({ fileName });
+    // fs.unlink(tempFilePath, (err) => {
+    //   if (err) {
+    //     console.error('Failed to delete temporary file:', err);
+    //   }
+    // });
+  });
   } catch (error) {
     console.error(error);
 

@@ -3,7 +3,6 @@ declare module 'multer' {
   
     interface Multer {
       (options?: any): RequestHandler;
-      diskStorage(options: any): any;
     }
   
     const multer: Multer;
