@@ -13,7 +13,7 @@ export async function POST(req: any,res:any) {
     Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
   };
  
-  uploadHandler(req, res, function (err) {
+  uploadHandler(req, res, function (err:any) {
     console.log('file',req.file)
     // if (err) {
     //   return res.status(500).json({ error: err.message });
