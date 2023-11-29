@@ -3,7 +3,7 @@ import path from 'path';
 const upload = multer({
   storage: multer.diskStorage({
     destination: path.join(process.cwd(), 'public/uploads/'), 
-    filename: (req, file, cb) => {
+    filename: (req: any, file: any, cb:any) => {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
       cb(null, file.fieldname + '-' + uniqueSuffix);
     },
