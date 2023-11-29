@@ -4,8 +4,8 @@ import path from 'path';
 const os = require('os');
 const upload = multer({ dest: os.tmpdir() });
 const uploadHandler = upload.single('file'); 
-import { NextApiRequest, NextApiResponse } from 'next';
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
+import { NextRequest, NextResponse } from 'next';
+export async function POST(req: NextRequest, res: NextResponse) {
   try {
    
     const url = 'https://api.openai.com/v1/files';
