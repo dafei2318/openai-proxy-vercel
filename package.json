@@ -10,11 +10,11 @@
   },
   "dependencies": {
     "@vercel/analytics": "^0.1.8",
+    "form-data": "^4.0.0",
+    "next": "^13.4.10",
     "openai-edge": "^1.2.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "next": "^13.4.10",
-    "form-data": "latest"
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@types/node": "18.11.3",
