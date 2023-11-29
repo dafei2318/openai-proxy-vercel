@@ -14,7 +14,7 @@ export async function POST(req: any,res:any) {
   };
  
   uploadHandler(req, res, function (err:any) {
-    console.log('file',req.file)
+    console.log('file',req)
     // if (err) {
     //   return res.status(500).json({ error: err.message });
     // }
