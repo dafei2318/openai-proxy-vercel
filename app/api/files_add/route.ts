@@ -1,7 +1,6 @@
 
-import * as http from 'http';
 import { parse } from 'form-data';
-export async function POST(req: http.IncomingMessage) {
+export async function POST(req: Request) {
   try {
    
     const url = 'https://api.openai.com/v1/files';
