@@ -4,7 +4,6 @@ import path from 'path';
 const os = require('os');
 const upload = multer({ dest: os.tmpdir() });
 const uploadHandler = upload.single('file'); 
-import { Request, Response } from 'next';
 export async function POST(req: Request, res: Response) {
   try {
    
